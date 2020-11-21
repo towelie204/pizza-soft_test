@@ -1,7 +1,4 @@
-import { employeesAPI } from '../api/api';
-
-const SET_EMPLOYEES = 'SET_EMPLOYEES';
-const SET_PROFILE = 'SET_PROFILE';
+import { FETCH_EMPLOYEES, SET_PROFILE } from '../constants/actionTypes';
 
 let initialState = {
     employeesList: [],
@@ -10,7 +7,7 @@ let initialState = {
 
 const employeesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_EMPLOYEES:
+        case FETCH_EMPLOYEES:
             return {
                 ...state,
                 employeesList: action.employeesList
@@ -24,8 +21,5 @@ const employeesReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export const setEmployeesList = (employeesList) => ({ type: SET_EMPLOYEES, employeesList })
-export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 
 export default employeesReducer;

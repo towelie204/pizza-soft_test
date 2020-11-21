@@ -3,29 +3,32 @@ import styles from './Employee.module.css';
 import defaulPersonImage from '../../assets/images/default_user.png';
 import { NavLink } from 'react-router-dom';
 
-const Employee = (props) => {
-    return (
-        <div className={ !props.person.isArchive 
-                ? styles.employeeCard
-                : `${styles.employeeCard} ${styles.isArchive}` }>
-            <NavLink to={`/profile/${props.person.id}`}>
-                <img src={props.person.image || defaulPersonImage}
-                    alt={props.person.name} className={styles.personImage} />
-            </NavLink>
+const Employee = (props) => (
+    <tr className={!props.person.isArchive
+        ? styles.employeeCard
+        : `${styles.employeeCard} ${styles.isArchive}`}>
 
-            <div className={styles.personInfo}>
-                <NavLink to={`/profile/${props.person.id}`} className={ styles.personLink }>
-                    <p className={styles.personName}>{props.person.name}</p>
-                </NavLink>
-                <span>Должность: {
+        <td className={styles.personInfo}>
+            <NavLink to={`/profile/${props.person.id}`} className={styles.personLink}>
+                <span className={styles.personName}>{props.person.name}</span>
+            </NavLink>
+        </td>
+        <td>
+            <span>
+                {
                     (props.person.role === 'driver') && 'водитель' ||
                     (props.person.role === 'waiter') && 'официант' ||
                     (props.person.role === 'cook') && 'повар'
-                }</span>
-                <span>Телефон: {props.person.phone}</span>
-            </div>
-        </div>
-    )
-}
+                }
+            </span>
+        </td>
+        <td>
+            <span>{props.person.phone}</span>
+        </td>
+        <td>
+            <span>{props.person.birthday}</span>
+        </td>
+    </tr >
+)
 
 export default Employee;

@@ -1,0 +1,3 @@
+export const FETCH_EMPLOYEES = 'FETCH_EMPLOYEES';
+export const SET_PROFILE = 'SET_PROFILE';
+export const TOGGLE_SORT_ORDER = 'TOGGLE_SORT_ORDER';

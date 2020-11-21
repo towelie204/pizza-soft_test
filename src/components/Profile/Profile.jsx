@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import styles from './Profile.module.css';
-import { setProfile } from '../../redux/profile-reducer';
+import { setProfile } from '../../__data__/actionCreators';
 
 class Profile extends React.Component {
     componentDidMount() {

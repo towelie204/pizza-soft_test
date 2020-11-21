@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 import './App.css';
-import EmployeesList from './components/EmployeesList/EmployeesList';
+import EmployeesTable from './components/EmployeesTable/EmployeesTable';
 import FilterForm from './components/FilterForm/FilterForm';
 import ProfileContainer from './components/Profile/Profile';
 
@@ -12,7 +12,7 @@ function App() {
 
       <main className="mainContainer">
         <FilterForm />
-        <Route path='/employee' render={() => <EmployeesList />} />
+        <Route path='/employee' render={() => <EmployeesTable />} />
         <Route path='/profile/:personId' render={() => <ProfileContainer />} />
       </main>
     </div>
