@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import styles from './Profile.module.css';
 import { setProfile } from '../../__data__/actionCreators';
+import { getProfile } from '../../__data__/selectors/employeeSelectors';
 
 class Profile extends React.Component {
     componentDidMount() {
@@ -39,13 +40,7 @@ class Profile extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
-    return {
-        profile: state.employeesList.profile
-    }
-}
-
-//const ProfileContainer = connect(mapStateToProps, {})(Profile);
+let mapStateToProps = (state) => ({profile: getProfile(state)})
 
 export default compose(
     connect(mapStateToProps, { setProfile }),

@@ -1,19 +1,23 @@
-import { TOGGLE_SORT_ORDER } from '../constants/actionTypes';
+import { TOGGLE_SORT_ORDER, SET_ROLE_FILTER } from '../constants/actionTypes';
+import _ from 'lodash';
 
 let initialState = {
-    sortings: [],
+    sorting: null,
     filters: null
 }
 
 const filtersReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_SORT_ORDER:
-            return {
-                ...state,
-                sortings: state.sortings.includes(action.payload)
-                    ? state.sortings.filter((sorting) => sorting === action.payload)
-                    : [...state.sortings, action.payload]
+            const sorting = {
+                name: action.payload, 
+                order: state?.sorting?.name === action.payload
+                    ? !state.sorting.order
+                    : true
             }
+            return {...state, sorting}
+        case SET_ROLE_FILTER:
+            return {...state, filters: {...state.filters, role: action.payload}}
         default:
             return state;
     }

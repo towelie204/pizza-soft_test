@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
-const getFilters = (state) => state.filters
+const getFiltersReducerState = (state) => state.filters
 
-export const getSortings = createSelector(getFilters, (filters) => filters.sortings)
+export const getSorting = createSelector(getFiltersReducerState, (filters) => filters.sorting)
+
+export const getFilters = createSelector(getFiltersReducerState, (filters) => filters.filters)
