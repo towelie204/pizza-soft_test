@@ -1,0 +1,36 @@
+.employeeCard {
+    display: flex;
+    padding: 5px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.personInfo {
+    margin: 0 0 0 20px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.personName {
+    font-size: 1.2rem;
+    margin: 0 0 6px 0;
+}
+
+.personImage {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.personLink {
+    text-decoration: none;
+    color: #212121;
+}
+
+.isArchive > div > span,
+.isArchive > div > a > p {
+    color: #666666;
+}
