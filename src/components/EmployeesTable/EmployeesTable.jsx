@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { fetchEmployeesTable, toggleSortOrder } from '../../__data__/actionCreators';
 import { getSortedEmployeesList } from '../../__data__/selectors/commonSelectors';
-import { getEmployeesList } from '../../__data__/selectors/employeeSelectors';
 import { getSorting } from '../../__data__/selectors/filterSelectors';
 import Employee from '../Employee/Employee';
 import EmployeesTableHeader from '../EmployeesTableHeader/EmployeesTableHeader';
@@ -18,17 +17,25 @@ const EmployeesTableComponent = (props) => {
 
     useEffect(() => {
         props.fetchEmployeesTable();
-    }, [props.employeesList.length]);
+    }, [props.employeesList?.length]);
 
     const columnHeaders = [
-        { title: 'Сотрудник', sortable: true, onClick: createToggleSortOrder('name', props.toggleSortOrder) },
+        {
+            title: 'Сотрудник',
+            sortable: true,
+            name: 'name',
+            onClick: createToggleSortOrder('name', props.toggleSortOrder)
+        },
         { title: 'Должность' },
         { title: 'Телефон' },
-        { title: 'Дата рождения', sortable: true, onClick: createToggleSortOrder('birthday', props.toggleSortOrder) }
+        {
+            title: 'Дата рождения',
+            sortable: true, 
+            name: 'birthday',
+            onClick: createToggleSortOrder('birthday', props.toggleSortOrder)
+        }
     ]
 
-    console.log(props.sorting)
-    
     return (
         <table className={styles.employeesList}>
             <EmployeesTableHeader sorting={props.sorting} headers={ columnHeaders } />

@@ -22,7 +22,7 @@
     color: #212121;
 }
 
-.isArchive > div > span,
-.isArchive > div > a > p {
+.isArchive > td > a > span,
+.isArchive > td > span {
     color: #666666;
 }

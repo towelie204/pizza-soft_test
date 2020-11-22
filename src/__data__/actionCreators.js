@@ -1,12 +1,17 @@
-import axios from 'axios';
+import { employeesAPI } from '../api/api';
 
-import { FETCH_EMPLOYEES, SET_PROFILE, TOGGLE_SORT_ORDER, SET_ROLE_FILTER } from "./constants/actionTypes"
+import {
+    FETCH_EMPLOYEES,
+    SET_PROFILE,
+    TOGGLE_SORT_ORDER,
+    SET_ROLE_FILTER,
+    SET_ARCHIVE_FILTER
+} from "./constants/actionTypes"
 
 export const fetchEmployeesTable = () => async (dispatch) => {
-    
     try {
-        const response = await axios.get('https://raw.githubusercontent.com/towelie204/test_API/master/employees.json')
-        dispatch({ type: FETCH_EMPLOYEES, employeesList: response.data })
+        const response = await employeesAPI;
+        dispatch({ type: FETCH_EMPLOYEES, employeesList: response })
     } catch (err) {
         console.error(err)
     }
@@ -21,3 +26,5 @@ export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 export const toggleSortOrder = (key) => ({ type: TOGGLE_SORT_ORDER, payload: key })
 
 export const setRoleFilter = (role) => ({ type: SET_ROLE_FILTER, payload: role })
+
+export const setArchiveFilter = (isArchive) => ({ type: SET_ARCHIVE_FILTER, payload: isArchive })

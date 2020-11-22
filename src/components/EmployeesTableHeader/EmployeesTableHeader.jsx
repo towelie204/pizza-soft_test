@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './EmployeesTableHeader.module.css';
+
 const EmployeesTableHeader = (props) => {
-    console.log(props);
+
     return (
         <thead>
             <tr>
                 {props.headers.map(header => (
                     <th key={header.title}>
                         {header.title}
-                        {header.sortable && <button onClick={header.onClick}>▲</button>}
-                        {/* {header.sortable && (props?.sorting?.order) 
-                        && <button onClick={header.onClick}>▲</button>}
-                        {header.sortable && (!props.sorting) 
-                        && <button onClick={header.onClick}>▼</button>} */}
+                        {header.sortable &&
+                            <button onClick={header.onClick}
+                                className={header.name === props.sorting?.name
+                                    && props.sorting.order === true
+                                    && styles.arrowDown}>
+                                ▲
+                            </button>}
                     </th>
                 ))}
             </tr>

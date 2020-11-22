@@ -13,11 +13,19 @@ export const getFilteredEmployeesList = createSelector(
     [getEmployeesList, getFilters],
     (employeesList, filters) => {
         let resultList = employeesList;
-        if (filters.role) {
+        if (filters?.role && filters.role !== 'all') {
             resultList = resultList.filter((employee) => {
                 return employee.role === filters.role
             })
         }
+        if (filters?.isArchive === undefined) {
+            return resultList
+        } else if (filters?.isArchive) {
+            return resultList.filter(employee => {
+                return employee.isArchive === filters.isArchive
+            })
+        }
+
         return resultList;
     }
 )

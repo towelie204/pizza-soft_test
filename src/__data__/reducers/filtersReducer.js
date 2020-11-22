@@ -1,4 +1,4 @@
-import { TOGGLE_SORT_ORDER, SET_ROLE_FILTER } from '../constants/actionTypes';
+import { TOGGLE_SORT_ORDER, SET_ROLE_FILTER, SET_ARCHIVE_FILTER } from '../constants/actionTypes';
 import _ from 'lodash';
 
 let initialState = {
@@ -18,6 +18,8 @@ const filtersReducer = (state = initialState, action) => {
             return {...state, sorting}
         case SET_ROLE_FILTER:
             return {...state, filters: {...state.filters, role: action.payload}}
+        case SET_ARCHIVE_FILTER:
+            return {...state, filters: {...state.filters, isArchive: action.payload}}
         default:
             return state;
     }
