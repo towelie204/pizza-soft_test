@@ -1,22 +1,24 @@
-import { Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import EmployeesTable from './components/EmployeesTable/EmployeesTable';
-import FilterForm from './components/FilterForm/FilterForm';
 import ProfileContainer from './components/Profile/Profile';
+import MainPage from './components/StartPage/StartPage';
+import { fetchEmployeesTable } from './__data__/actionCreators';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.fetchEmployeesTable();
+  });
+
   return (
     <div className="App">
-      <header>
-      </header>
-
-      <main className="mainContainer">
-        <FilterForm />
-        <Route path='/employee' render={() => <EmployeesTable />} />
+      <Switch>
+        <Route exact path='/' render={() => <MainPage />} />
         <Route path='/profile/:personId' render={() => <ProfileContainer />} />
-      </main>
+      </Switch>
     </div>
   );
 }
 
-export default App;
+export default connect(null, { fetchEmployeesTable })(App);

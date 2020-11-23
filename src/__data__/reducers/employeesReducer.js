@@ -1,4 +1,4 @@
-import { FETCH_EMPLOYEES, SET_PROFILE } from '../constants/actionTypes';
+import { FETCH_EMPLOYEES, SET_PROFILE, SAVE_PROFILE } from '../constants/actionTypes';
 
 let initialState = {
     employeesList: [],
@@ -15,7 +15,18 @@ const employeesReducer = (state = initialState, action) => {
         case SET_PROFILE:
             return {
                 ...state,
-                profile: state.employeesList[action.profile - 1]
+                profile: state.employeesList.find(item => item.id === Number(action.payload))
+            }
+        case SAVE_PROFILE:
+            const newArr = state.employeesList.map((employee) => {
+                if (employee.id === Number(action.payload.id)) {
+                    return action.payload
+                }
+                return employee
+            })
+            return {
+                ...state,
+                employeesList: newArr
             }
         default:
             return state;
@@ -23,3 +34,4 @@ const employeesReducer = (state = initialState, action) => {
 }
 
 export default employeesReducer;
+

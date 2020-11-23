@@ -1,3 +1,7 @@
 .arrowDown {
     transform: rotate(180deg);
 }
+
+.arrowSide {
+    transform: rotate(90deg);
+}

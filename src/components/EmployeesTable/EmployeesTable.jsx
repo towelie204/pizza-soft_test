@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchEmployeesTable, toggleSortOrder } from '../../__data__/actionCreators';
+import { fetchEmployeesTable, setProfile, toggleSortOrder } from '../../__data__/actionCreators';
 import { getSortedEmployeesList } from '../../__data__/selectors/commonSelectors';
 import { getSorting } from '../../__data__/selectors/filterSelectors';
 import Employee from '../Employee/Employee';
@@ -13,45 +13,45 @@ const createToggleSortOrder = (key, handler) => (event) => {
     handler(key);
 }
 
-const EmployeesTableComponent = (props) => {
+const columnHeaders = (props) => [
+    {
+        title: 'Сотрудник',
+        sortable: true,
+        name: 'name',
+        onClick: createToggleSortOrder('name', props.toggleSortOrder)
+    },
+    { title: 'Должность' },
+    { title: 'Телефон' },
+    {
+        title: 'Дата рождения',
+        sortable: true,
+        name: 'birthday',
+        onClick: createToggleSortOrder('birthday', props.toggleSortOrder)
+    }
+]
 
-    useEffect(() => {
-        props.fetchEmployeesTable();
-    }, [props.employeesList?.length]);
+class EmployeesTableComponent extends React.Component {
 
-    const columnHeaders = [
-        {
-            title: 'Сотрудник',
-            sortable: true,
-            name: 'name',
-            onClick: createToggleSortOrder('name', props.toggleSortOrder)
-        },
-        { title: 'Должность' },
-        { title: 'Телефон' },
-        {
-            title: 'Дата рождения',
-            sortable: true, 
-            name: 'birthday',
-            onClick: createToggleSortOrder('birthday', props.toggleSortOrder)
-        }
-    ]
-
-    return (
-        <table className={styles.employeesList}>
-            <EmployeesTableHeader sorting={props.sorting} headers={ columnHeaders } />
-            <tbody>
-                { props.employeesList.map(person => <Employee key={person.id} person={person} />)}
-            </tbody>
-        </table>
-    )
+    render() {
+        return (
+            <table className={styles.employeesList}>
+                <EmployeesTableHeader sorting={this.props.sorting} headers={columnHeaders(this.props)} />
+                <tbody>
+                    {this.props.employeesList.map(person => <Employee key={person.id}
+                        person={person}
+                        setProfile={this.props.setProfile} />)}
+                </tbody>
+            </table>
+        )
+    }
 }
 
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = (state) => ({
     employeesList: getSortedEmployeesList(state),
     sorting: getSorting(state)
 })
 
-const mapDispatchToProps =  { fetchEmployeesTable, toggleSortOrder };
+const mapDispatchToProps = { fetchEmployeesTable, toggleSortOrder, setProfile };
 
 const EmployeesTable = connect(mapStateToProps, mapDispatchToProps)(EmployeesTableComponent);
 

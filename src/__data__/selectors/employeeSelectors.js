@@ -6,7 +6,7 @@ const getEmployees = (state) => state.employees;
 export const getEmployeesList = createSelector(getEmployees, (employees) => employees.employeesList)
 export const getProfile = createSelector(getEmployees, (employees) => employees.profile)
 
-const rolesMap = {
+export const rolesMap = {
     all: 'Все сотрудники',
     driver: 'Водитель',
     waiter: 'Официант',

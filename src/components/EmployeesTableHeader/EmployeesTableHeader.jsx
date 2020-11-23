@@ -13,9 +13,11 @@ const EmployeesTableHeader = (props) => {
                         {header.title}
                         {header.sortable &&
                             <button onClick={header.onClick}
-                                className={header.name === props.sorting?.name
+                                className={(header.name === props.sorting?.name
                                     && props.sorting.order === true
-                                    && styles.arrowDown}>
+                                    && styles.arrowDown) ||
+                                    (header.name !== props.sorting?.name
+                                        && styles.arrowSide)}>
                                 ▲
                             </button>}
                     </th>
