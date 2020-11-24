@@ -7,14 +7,24 @@ import PhoneInput from '../common/PhoneInpit/PhoneInput';
 const ProfileForm = (props) => (
     <div className={styles.profilePage}>
         <NavLink to={'/'}>Назад</NavLink>
-        <form onSubmit={props.handleSubmit}>
+        <form className={styles.employeeForm} onSubmit={props.handleSubmit}>
             <div>
-                <input type="text" value={props.profile.name} onChange={props.createHandleChange('name')} />
+                <label htmlFor="name">Имя, фамилия</label>
+                <input type="text" 
+                    id="name"
+                    name="name"
+                    value={props.profile.name} 
+                    onChange={props.createHandleChange('name')} />
             </div>
             <div>
-                <PhoneInput value={props.profile.phone} onChange={props.createHandleChange('phone')} />
+                <label htmlFor="phone">Телефон</label>
+                <PhoneInput name="phone"
+                    id="phone" 
+                    value={props.profile.phone} 
+                    onChange={props.createHandleChange('phone')} />
             </div>
-            <div>
+            <div className={styles.select}>
+                <label htmlFor="role">Должность</label>
                 <select onChange={props.handleSelectRole} name="role" id="role">
                     {Object.entries(rolesMap).map(entry => {
                         if (entry[0] !== 'all') {
@@ -27,9 +37,14 @@ const ProfileForm = (props) => (
                 </select>
             </div>
             <div>
-                <input type="date" value={props.profile.birthday} onChange={props.createHandleChange('birthday')} />
+                <label htmlFor="birthday">Дата рождения</label>
+                <input name="birthday"
+                    id="birthday"
+                    type="date" 
+                    value={props.profile.birthday} 
+                    onChange={props.createHandleChange('birthday')} />
             </div>
-            <div>
+            <div className={styles.archive}>
                 <label htmlFor="isArchive">В архиве: </label>
                 <input type="checkbox"
                     name="isArchive"
@@ -38,7 +53,7 @@ const ProfileForm = (props) => (
                     onChange={props.handleIsArchive} />
             </div>
             <div>
-                <button>Сохранить изменения</button>
+                <button className={styles.submitBtn}>Сохранить изменения</button>
             </div>
         </form>
     </div>

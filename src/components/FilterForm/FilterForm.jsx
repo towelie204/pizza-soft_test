@@ -42,7 +42,9 @@ const FilterFormComponent = (props) => {
                 </div>
 
                 <div>
-                    <NavLink to={`/add-employee`}>Добавить сотрудника</NavLink>
+                    <NavLink to={`/add-employee`} className={styles.submitBtn}>
+                        Добавить сотрудника
+                    </NavLink>
                 </div>
             </div>
         </div>
