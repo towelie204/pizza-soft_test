@@ -5,20 +5,27 @@ import styles from './EmployeesTableHeader.module.css';
 
 const EmployeesTableHeader = (props) => {
 
+    const btnStyles = (props) => {
+        if (props.sorting.order === true) {
+            return `${styles.sortingBtn} ${styles.arrowDown }`
+        } else return styles.sortingBtn
+    }
+
     return (
         <thead>
-            <tr>
+            <tr className={styles.tableHeader}>
                 {props.headers.map(header => (
                     <th key={header.title}>
                         {header.title}
-                        {header.sortable &&
+                        {header.sortable && header.name === props.sorting?.name &&
                             <button onClick={header.onClick}
-                                className={(header.name === props.sorting?.name
-                                    && props.sorting.order === true
-                                    && styles.arrowDown) ||
-                                    (header.name !== props.sorting?.name
-                                        && styles.arrowSide)}>
-                                ▲
+                                className={btnStyles(props)}>
+                                <span className={styles.btnInner}>▲</span>
+                            </button>}
+                        {header.sortable && header.name !== props.sorting?.name &&
+                            <button onClick={header.onClick}
+                                className={styles.sortingBtn}>
+                                <span className={styles.btnInner}>&#8211;</span>
                             </button>}
                     </th>
                 ))}

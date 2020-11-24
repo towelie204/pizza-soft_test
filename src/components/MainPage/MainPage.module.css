@@ -1,0 +1,23 @@
+.mainPage {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+}
+
+@media (max-width: 1200px) {
+    .mainPage {
+        grid-template-columns: 230px 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .mainPage {
+        grid-template-columns: 190px 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .mainPage {
+        display: flex;
+        flex-direction: column;
+    }
+} 

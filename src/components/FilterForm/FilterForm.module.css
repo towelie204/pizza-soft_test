@@ -1,4 +1,170 @@
 .filterForm {
-    background-color: #b3b2b2;
+    background-color: #2e2e2e;
     min-height: 100vh;
+}
+
+.filtersWrapper {
+    position: fixed;
+    top: 45px;
+    left: 70px;
+}
+
+.roles {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 40px 0;
+}
+
+.roles > label,
+.archive > label {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    color: #fff;
+    font-weight: 300;
+}
+
+.archive > label {
+    margin-right: 0.4rem;
+}
+
+.archive {
+    display: flex;
+    align-items: center;
+}
+
+.select {
+    position: relative;
+}
+
+.select > select {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 1rem;
+    color: #444;
+}
+
+.select > select:focus {
+    outline: none;
+}
+
+.select:after {
+    content: "";
+    display: block;
+    border-style: solid;
+    border-width: 6px 5px 0 5px;
+    border-color: #000 transparent transparent transparent;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    z-index: 1;
+    margin-top: -3px;
+}
+
+.select > select:hover {
+    box-shadow: inset 0 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.archive > input[type=checkbox] {
+    margin-bottom: 0.45rem;
+    display: block;
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+
+@media (max-width: 1200px) {
+    .filtersWrapper {
+        left: 35px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .filterForm {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .filtersWrapper {
+        left: 16px;
+    }
+
+    .roles > label,
+    .archive > label {
+        font-size: 1.3rem;
+    }
+
+    .select > select {
+        padding: 0.35rem 2rem 0.35rem 0.6rem;
+    }
+
+    .select:after {
+        right: 0.6rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .filterForm {
+        min-height: auto;
+    }
+    
+    .filtersWrapper {
+        padding: 30px 40px 20px 40px;
+        position: initial;
+        display: flex;
+        align-self: start;
+    }
+
+    .roles {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        margin: 0 40px 0 0;
+    }
+
+    .roles > label {
+        margin-right: 1rem;
+    }
+} 
+
+@media (max-width: 720px) {
+    .roles > label,
+    .archive > label {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 599px) {
+    .filtersWrapper {
+        padding: 25px 25px 18px 25px;
+        justify-content: space-between;
+    }
+
+    .roles {
+        margin: 0;
+    }
+}
+
+@media (max-width: 470px) {
+    .filtersWrapper {
+        flex-direction: column;
+    }
+
+    .roles {
+        margin: 0 0 1.2rem;
+    }
+}
+
+@media (max-width: 340px) {
+    .filtersWrapper {
+        padding: 25px 13px 18px 20px;
+    }
 }

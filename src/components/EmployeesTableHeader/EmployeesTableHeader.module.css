@@ -1,7 +1,59 @@
+.tableHeader > th {
+    height: 2.6rem;
+    font-weight: 300;
+    font-size: 1.3rem;
+    vertical-align: center;
+}
+
+.tableHeader:hover {
+    box-shadow: none;
+}
+
+.sortingBtn {
+    margin: 0 0.6rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: 1000;
+    font-size: 1rem;
+}
+
+.btnInner {
+    margin: 0 auto;
+}
+
 .arrowDown {
     transform: rotate(180deg);
 }
 
-.arrowSide {
-    transform: rotate(90deg);
+
+@media (max-width: 1024px) {
+    .tableHeader > th {
+        font-size: 1.1rem;
+    }
+
+    .sortingBtn {
+        margin: 0 0.3rem;
+        width: 1.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .sortingBtn {
+        margin: 0 0.6rem;
+        width: 2rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .tableHeader > th {
+        font-size: 0.95rem;
+    }
+
+    .sortingBtn {
+        height: 1.3rem;
+        margin: 0 0.2rem;
+        width: 1.6rem;
+        font-size: 0.8rem;
+    }
 }

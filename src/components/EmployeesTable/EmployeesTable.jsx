@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchEmployeesTable, setProfile, toggleSortOrder } from '../../__data__/actionCreators';
@@ -34,14 +34,17 @@ class EmployeesTableComponent extends React.Component {
 
     render() {
         return (
-            <table className={styles.employeesList}>
-                <EmployeesTableHeader sorting={this.props.sorting} headers={columnHeaders(this.props)} />
-                <tbody>
-                    {this.props.employeesList.map(person => <Employee key={person.id}
-                        person={person}
-                        setProfile={this.props.setProfile} />)}
-                </tbody>
-            </table>
+            <div className={styles.tableWrapper}>
+                <table className={styles.employeesList}>
+                    <EmployeesTableHeader sorting={this.props.sorting}
+                        headers={columnHeaders(this.props)} />
+                    <tbody>
+                        {this.props.employeesList.map(person => <Employee key={person.id}
+                            person={person}
+                            setProfile={this.props.setProfile} />)}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

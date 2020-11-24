@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { setRoleFilter, setArchiveFilter } from '../../__data__/actionCreators';
 
 import { getRoles } from '../../__data__/selectors/employeeSelectors';
@@ -13,40 +14,46 @@ const FilterFormComponent = (props) => {
     }
 
     const createHandleIsArchive = (handler) => (event) => {
-        console.log(event.target.checked)
         handler(event.target.checked)
     }
 
     return (
         <div className={styles.filterForm}>
-            <div>
-                <label htmlFor="role">Должность: </label>
-                <select onChange={createHandleSelect(props.setRoleFilter)} name="role" id="role">
-                    <option value="all">Все сотрудники</option>
-                    {props.roles.map((role) => (
-                        <option key={role.value} value={role.value}>{role.text}</option>
-                    ))}
-                </select>
-            </div>
+            <div className={styles.filtersWrapper}>
+                <div className={styles.roles}>
+                    <label htmlFor="role">Должность: </label>
+                    <div className={styles.select}>
+                        <select onChange={createHandleSelect(props.setRoleFilter)} name="role" id="role">
+                            <option value="all">Все сотрудники</option>
+                            {props.roles.map((role) => (
+                                <option key={role.value} value={role.value}>{role.text}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
 
-            <div>
-                <label htmlFor="isArchive">В архиве:</label>
-                <input name="isArchive"
-                    id="isArchive"
-                    type="checkbox"
-                    checked={props.isArchive}
-                    onChange={createHandleIsArchive(props.setArchiveFilter)} />
-            </div>
+                <div className={styles.archive}>
+                    <label htmlFor="isArchive">В архиве:</label>
+                    <input name="isArchive"
+                        id="isArchive"
+                        type="checkbox"
+                        checked={props.isArchive}
+                        onChange={createHandleIsArchive(props.setArchiveFilter)} />
+                </div>
 
+                <div>
+                    <NavLink to={`/add-employee`}>Добавить сотрудника</NavLink>
+                </div>
+            </div>
         </div>
     )
 }
 
-const mapStateToProps = (state) => ({ 
+const mapStateToProps = (state) => ({
     roles: getRoles(state),
     isArchive: getArchived(state)
 })
 
-const mapDispatchToProps =  { setRoleFilter, setArchiveFilter };
+const mapDispatchToProps = { setRoleFilter, setArchiveFilter };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterFormComponent);

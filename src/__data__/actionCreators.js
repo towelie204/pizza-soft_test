@@ -6,7 +6,8 @@ import {
     TOGGLE_SORT_ORDER,
     SET_ROLE_FILTER,
     SET_ARCHIVE_FILTER,
-    SAVE_PROFILE
+    SAVE_PROFILE,
+    ADD_EMPLOYEE
 } from "./constants/actionTypes"
 
 export const fetchEmployeesTable = () => async (dispatch) => {
@@ -22,7 +23,9 @@ export const fetchEmployeesTable = () => async (dispatch) => {
 
 export const setProfile = (profile) => ({ type: SET_PROFILE, payload: profile })
 
-export const saveProfile = (profile) => ({ type:SAVE_PROFILE, payload: profile })
+export const saveProfile = (profile) => ({ type: SAVE_PROFILE, payload: profile })
+
+export const addEmployee = (profile) => ({type: ADD_EMPLOYEE, payload: profile})
 
 // Filters
 

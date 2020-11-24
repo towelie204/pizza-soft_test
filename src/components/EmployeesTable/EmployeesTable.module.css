@@ -1,4 +1,19 @@
 .employeesList {
-    background-color: #bbbbbb;
+    width: 100%;
+    background-color: #a1a1a1;
+}
+
+.tableWrapper {
     min-height: 100vh;
+    background-color: #fff;
+}
+
+@media (max-width: 599px) {
+    .tableWrapper {
+        overflow-x: scroll;
+    }
+
+    .employeesList {
+        width: 599px;
+    }
 }

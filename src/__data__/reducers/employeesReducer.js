@@ -1,4 +1,4 @@
-import { FETCH_EMPLOYEES, SET_PROFILE, SAVE_PROFILE } from '../constants/actionTypes';
+import { FETCH_EMPLOYEES, SET_PROFILE, SAVE_PROFILE, ADD_EMPLOYEE } from '../constants/actionTypes';
 
 let initialState = {
     employeesList: [],
@@ -28,10 +28,14 @@ const employeesReducer = (state = initialState, action) => {
                 ...state,
                 employeesList: newArr
             }
+        case ADD_EMPLOYEE:
+            return {
+                ...state,
+                employeesList: state.employeesList.concat(action.payload)
+            } 
         default:
             return state;
     }
 }
 
 export default employeesReducer;
-
