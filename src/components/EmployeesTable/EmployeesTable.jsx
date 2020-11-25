@@ -31,38 +31,34 @@ const columnHeaders = (props) => [
     }
 ]
 
-class EmployeesTableComponent extends React.Component {
-    static propTypes = {
-        employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-        sorting: PropTypes.object,
-        fetchEmployeesTable: PropTypes.func.isRequired,
-        toggleSortOrder: PropTypes.func.isRequired,
-        setProfile: PropTypes.func.isRequired
-    }
+const EmployeesTableComponent = (props) => (
+    <div className={styles.tableWrapper}>
+        <table className={styles.employeesList}>
+            <EmployeesTableHeader sorting={props.sorting}
+                headers={columnHeaders(props)} />
+            <tbody>
+                {props.employeesList.map(person => <Employee key={person.id}
+                    person={person}
+                    setProfile={props.setProfile} />)}
+            </tbody>
+        </table>
+    </div>
+)
 
-    static defaultProps = {
-        employeesList: [],
-        sorting: null,
-        fetchEmployeesTable() {},
-        toggleSortOrder() {},
-        setProfile() {}
-    }
+EmployeesTableComponent.propTypes = {
+    employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    sorting: PropTypes.object,
+    fetchEmployeesTable: PropTypes.func.isRequired,
+    toggleSortOrder: PropTypes.func.isRequired,
+    setProfile: PropTypes.func.isRequired
+}
 
-    render() {
-        return (
-            <div className={styles.tableWrapper}>
-                <table className={styles.employeesList}>
-                    <EmployeesTableHeader sorting={this.props.sorting}
-                        headers={columnHeaders(this.props)} />
-                    <tbody>
-                        {this.props.employeesList.map(person => <Employee key={person.id}
-                            person={person}
-                            setProfile={this.props.setProfile} />)}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+EmployeesTableComponent.defaultProps = {
+    employeesList: [],
+    sorting: null,
+    fetchEmployeesTable() {},
+    toggleSortOrder() {},
+    setProfile() {}
 }
 
 const mapStateToProps = (state) => ({

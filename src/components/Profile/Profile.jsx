@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -9,62 +9,61 @@ import { saveProfile } from '../../__data__/actionCreators';
 
 import ProfileForm from './ProfileForm';
 
-class Profile extends React.Component {
-    static propTypes = {
-        profile: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            isArchive: PropTypes.bool.isRequired,
-            role: PropTypes.string.isRequired,
-            phone: PropTypes.string.isRequired,
-            birthday: PropTypes.string.isRequired
-        }).isRequired,
-        saveProfile: PropTypes.func
-    }
+const Profile = (props) => {
 
-    static defaultProps = {
-        profile: [],
-        saveProfile() {}
-    }
+    const [profile, setProfile] = useState({
+        ...props.profile,
+        birthday: props.profile.birthday.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')
+    })
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            ...props.profile,
-            birthday: props.profile.birthday.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')
-        }
-    }
-    
-    createHandleChange = (key) => (event) => {
-        this.setState({
+    const createHandleChange = (key) => (event) => {
+        setProfile(prevState => ({
+            ...prevState,
             [key]: event.target.value
-        })
+        }))
     }
 
-    handleSelectRole = (event) => {
-        this.setState({
+    const handleSelectRole = (event) => {
+        setProfile(prevState => ({
+            ...prevState,
             role: event.target.value
-        })
+        }))
     }
 
-    handleIsArchive = (event) => {
-        this.setState({
+    const handleIsArchive = (event) => {
+        setProfile(prevState => ({
+            ...prevState,
             isArchive: event.target.checked
-        })
+        }))
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        this.props.saveProfile(this.state)
+        props.saveProfile(profile)
     }
 
-    render() {
-        return <ProfileForm profile={this.state}
-            createHandleChange={this.createHandleChange}
-            handleSelectRole={this.handleSelectRole}
-            handleIsArchive={this.handleIsArchive}
-            handleSubmit={this.handleSubmit} />
-    }
+    return <ProfileForm profile={profile}
+        createHandleChange={createHandleChange}
+        handleSelectRole={handleSelectRole}
+        handleIsArchive={handleIsArchive}
+        handleSubmit={handleSubmit} />
+}
+
+Profile.propTypes = {
+    profile: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        isArchive: PropTypes.bool.isRequired,
+        role: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        birthday: PropTypes.string.isRequired
+    }).isRequired,
+    saveProfile: PropTypes.func
+}
+
+Profile.defaultProps = {
+    profile: [],
+    saveProfile() { }
 }
 
 const mapStateToProps = (state) => ({ profile: getProfile(state) })

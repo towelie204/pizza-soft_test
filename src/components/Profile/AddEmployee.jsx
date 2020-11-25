@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -7,70 +7,58 @@ import { addEmployee } from '../../__data__/actionCreators';
 
 import ProfileForm from './ProfileForm';
 
-class AddEmployee extends React.Component {
-    static propTypes = {
-        employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-        addEmployee: PropTypes.func
-    };
-    
-    static defaultProps = {
-        employeesList: [],
-        addEmployee() {}
-    }
+const AddEmployee = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            profile: {
-                id: Number(props.employeesList.length + 1),
-                name: '',
-                isArchive: false,
-                role: 'driver',
-                phone: '',
-                birthday: ''
-            }
-        }
-    }
+    const [profile, setProfile] = useState({
+        id: Number(props.employeesList.length + 1),
+        name: '',
+        isArchive: false,
+        role: 'driver',
+        phone: '',
+        birthday: ''
+    });
 
-    createHandleChange = (key) => (event) => {
-        this.setState(prevState => ({
-            profile: {
-                ...prevState.profile,
-                [key]: event.target.value
-            }
+    const createHandleChange = (key) => (event) => {
+        setProfile(prevState => ({
+            ...prevState,
+            [key]: event.target.value
         }))
     }
 
-    handleSelectRole = (event) => {
-        this.setState(prevState => ({
-            profile: {
-                ...prevState.profile,
-                role: event.target.value
-            }
+    const handleSelectRole = (event) => {
+        setProfile(prevState => ({
+            ...prevState,
+            role: event.target.value
         }))
     }
 
-    handleIsArchive = (event) => {
-        this.setState(prevState => ({
-            profile: {
-                ...prevState.profile,
-                isArchive: event.target.checked
-            }
+    const handleIsArchive = (event) => {
+        setProfile(prevState => ({
+            ...prevState,
+            isArchive: event.target.checked
         }))
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addEmployee(this.state.profile)
+        props.addEmployee(profile)
     }
 
-    render() {
-        return <ProfileForm profile={this.state.profile}
-            createHandleChange={this.createHandleChange}
-            handleSelectRole={this.handleSelectRole}
-            handleIsArchive={this.handleIsArchive}
-            handleSubmit={this.handleSubmit} />
-    }
+    return <ProfileForm profile={profile}
+        createHandleChange={createHandleChange}
+        handleSelectRole={handleSelectRole}
+        handleIsArchive={handleIsArchive}
+        handleSubmit={handleSubmit} />
+}
+
+AddEmployee.propTypes = {
+    employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    addEmployee: PropTypes.func
+};
+
+AddEmployee.defaultProps = {
+    employeesList: [],
+    addEmployee() { }
 }
 
 const mapStateToProps = (state) => ({ employeesList: getEmployeesList(state) })
