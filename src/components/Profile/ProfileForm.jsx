@@ -1,8 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './Profile.module.css';
-import {  rolesMap } from '../../__data__/selectors/employeeSelectors';
+import PropTypes from 'prop-types';
+
+import { rolesMap } from '../../__data__/selectors/employeeSelectors';
 import PhoneInput from '../common/PhoneInpit/PhoneInput';
+
+import styles from './Profile.module.css';
 
 const ProfileForm = (props) => (
     <div className={styles.profilePage}>
@@ -10,29 +13,27 @@ const ProfileForm = (props) => (
         <form className={styles.employeeForm} onSubmit={props.handleSubmit}>
             <div>
                 <label htmlFor="name">Имя, фамилия</label>
-                <input type="text" 
+                <input type="text"
                     id="name"
                     name="name"
-                    value={props.profile.name} 
+                    value={props.profile.name}
                     onChange={props.createHandleChange('name')} />
             </div>
             <div>
                 <label htmlFor="phone">Телефон</label>
                 <PhoneInput name="phone"
-                    id="phone" 
-                    value={props.profile.phone} 
+                    id="phone"
+                    value={props.profile.phone}
                     onChange={props.createHandleChange('phone')} />
             </div>
             <div className={styles.select}>
                 <label htmlFor="role">Должность</label>
-                <select onChange={props.handleSelectRole} name="role" id="role">
+                <select defaultValue={props.profile.role} onChange={props.handleSelectRole} name="role" id="role">
                     {Object.entries(rolesMap).map(entry => {
                         if (entry[0] !== 'all') {
-                            if (entry[0] === props.profile.role) {
-                                return <option selected value={entry[0]}>{entry[1]}</option>
-                            }
-                            return <option value={entry[0]}>{entry[1]}</option>
+                            return <option key={entry[0]} value={entry[0]}>{entry[1]}</option>
                         }
+                        return null
                     })}
                 </select>
             </div>
@@ -40,8 +41,8 @@ const ProfileForm = (props) => (
                 <label htmlFor="birthday">Дата рождения</label>
                 <input name="birthday"
                     id="birthday"
-                    type="date" 
-                    value={props.profile.birthday} 
+                    type="date"
+                    value={props.profile.birthday}
                     onChange={props.createHandleChange('birthday')} />
             </div>
             <div className={styles.archive}>
@@ -58,5 +59,22 @@ const ProfileForm = (props) => (
         </form>
     </div>
 )
+
+
+ProfileForm.propTypes = {
+    profile: PropTypes.object,
+    createHandleChange: PropTypes.func.isRequired,
+    handleSelectRole: PropTypes.func.isRequired,
+    handleIsArchive: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
+};
+
+ProfileForm.defaultProps = {
+    profile: {},
+    createHandleChange() {},
+    handleSelectRole() {},
+    handleIsArchive() {},
+    handleSubmit() {}
+}
 
 export default ProfileForm;

@@ -1,10 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { getEmployeesList } from '../../__data__/selectors/employeeSelectors';
 import { addEmployee } from '../../__data__/actionCreators';
+
 import ProfileForm from './ProfileForm';
 
 class AddEmployee extends React.Component {
+    static propTypes = {
+        employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+        addEmployee: PropTypes.func
+    };
+    
+    static defaultProps = {
+        employeesList: [],
+        addEmployee() {}
+    }
+
     constructor(props) {
         super(props);
         this.state = {

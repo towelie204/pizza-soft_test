@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fetchEmployeesTable, setProfile, toggleSortOrder } from '../../__data__/actionCreators';
 import { getSortedEmployeesList } from '../../__data__/selectors/commonSelectors';
@@ -31,6 +32,21 @@ const columnHeaders = (props) => [
 ]
 
 class EmployeesTableComponent extends React.Component {
+    static propTypes = {
+        employeesList: PropTypes.arrayOf(PropTypes.object).isRequired,
+        sorting: PropTypes.object,
+        fetchEmployeesTable: PropTypes.func.isRequired,
+        toggleSortOrder: PropTypes.func.isRequired,
+        setProfile: PropTypes.func.isRequired
+    }
+
+    static defaultProps = {
+        employeesList: [],
+        sorting: null,
+        fetchEmployeesTable() {},
+        toggleSortOrder() {},
+        setProfile() {}
+    }
 
     render() {
         return (

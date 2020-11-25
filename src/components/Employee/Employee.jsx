@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './Employee.module.css';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import styles from './Employee.module.css';
 
 const Employee = (props) => {
     const createClickHandler = (id) => (event) => {
@@ -17,7 +19,6 @@ const Employee = (props) => {
                     className={styles.personLink}>
                     <span className={styles.personName}>{props.person.name}</span>
                 </NavLink>
-
             </td>
             <td width='15%'>
                 <NavLink onClick={createClickHandler(props.person.id)}
@@ -46,10 +47,25 @@ const Employee = (props) => {
                     <span className={styles.birthdayCell}>{props.person.birthday}</span>
                 </NavLink>
             </td>
-
         </tr >
-
     )
+}
+
+Employee.propTypes = {
+    person: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        isArchive: PropTypes.bool.isRequired,
+        role: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        birthday: PropTypes.string.isRequired
+    }).isRequired,
+    setProfile: PropTypes.func.isRequired
+}
+
+Employee.defaulProps = {
+    person: {},
+    setProfile() {}
 }
 
 export default Employee;

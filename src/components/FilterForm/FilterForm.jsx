@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { setRoleFilter, setArchiveFilter } from '../../__data__/actionCreators';
+import PropTypes from 'prop-types';
 
+import { setRoleFilter, setArchiveFilter } from '../../__data__/actionCreators';
 import { getRoles } from '../../__data__/selectors/employeeSelectors';
 import { getArchived } from '../../__data__/selectors/filterSelectors';
 
@@ -16,7 +17,7 @@ const FilterFormComponent = (props) => {
     const createHandleIsArchive = (handler) => (event) => {
         handler(event.target.checked)
     }
-
+    
     return (
         <div className={styles.filterForm}>
             <div className={styles.filtersWrapper}>
@@ -49,6 +50,20 @@ const FilterFormComponent = (props) => {
             </div>
         </div>
     )
+}
+
+FilterFormComponent.propTypes = {
+    roles: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isArchive: PropTypes.bool,
+    setRoleFilter: PropTypes.func.isRequired,
+    setArchiveFilter: PropTypes.func.isRequired
+}
+
+FilterFormComponent.defaultProps = {
+    roles: [],
+    isArchive: false,
+    setRoleFilter() {},
+    setArchiveFilter() {}
 }
 
 const mapStateToProps = (state) => ({

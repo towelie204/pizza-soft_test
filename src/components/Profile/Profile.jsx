@@ -2,11 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import PropTypes from 'prop-types';
+
 import { getProfile } from '../../__data__/selectors/employeeSelectors';
 import { saveProfile } from '../../__data__/actionCreators';
+
 import ProfileForm from './ProfileForm';
 
 class Profile extends React.Component {
+    static propTypes = {
+        profile: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            isArchive: PropTypes.bool.isRequired,
+            role: PropTypes.string.isRequired,
+            phone: PropTypes.string.isRequired,
+            birthday: PropTypes.string.isRequired
+        }).isRequired,
+        saveProfile: PropTypes.func
+    }
+
+    static defaultProps = {
+        profile: [],
+        saveProfile() {}
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +53,6 @@ class Profile extends React.Component {
     }
 
     handleSubmit = (event) => {
-        console.log(this.state.phone)
         event.preventDefault();
         this.props.saveProfile(this.state)
     }
@@ -55,11 +74,3 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withRouter
 )(Profile);
-
-
-
-// class BirthdayInput extends React.Component {
-//     render() {
-//         return <InputMask {...this.props} mask="99.99.9999" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" maskChar=" " />;
-//     }
-// }
