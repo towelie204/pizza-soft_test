@@ -1,0 +1,37 @@
+.alertWindow {
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 0 1.7rem;
+    max-height: fit-content;
+    z-index: 99999;
+    width: 480px;
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 1.2rem 2.25rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    margin-top: 60px;
+    box-shadow: 0 0 15px 5px rgba(1, 1, 1, 0.1);
+}
+
+.alertWrapper {
+    position:fixed;
+    z-index: 999;
+    display:flex;
+    align-items: flex-start;
+    top:0px;
+    left:0px;
+    width:100vw;
+    height:10px;
+}
+
+@media (max-width: 490px) {
+    .alertWindow {
+        padding: 1.2rem 0 1rem;
+        font-size: 1.4rem;
+        max-width: 90%;
+    }
+}

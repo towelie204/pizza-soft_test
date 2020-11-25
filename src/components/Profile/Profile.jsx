@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
 import { getProfile } from '../../__data__/selectors/employeeSelectors';
-import { saveProfile } from '../../__data__/actionCreators';
+import { fetchEmployeesTable, setProfile, saveProfile, showAlert } from '../../__data__/actionCreators';
+import Alert from '../common/Alert/Alert';
 
 import ProfileForm from './ProfileForm';
 
@@ -39,14 +38,20 @@ const Profile = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.saveProfile(profile)
+        props.saveProfile(profile);
+        props.showAlert();
     }
 
-    return <ProfileForm profile={profile}
-        createHandleChange={createHandleChange}
-        handleSelectRole={handleSelectRole}
-        handleIsArchive={handleIsArchive}
-        handleSubmit={handleSubmit} />
+    return (
+        <>
+            <Alert message='Данные сохранены' />
+            <ProfileForm profile={profile}
+                createHandleChange={createHandleChange}
+                handleSelectRole={handleSelectRole}
+                handleIsArchive={handleIsArchive}
+                handleSubmit={handleSubmit} />
+        </>
+    )
 }
 
 Profile.propTypes = {
@@ -63,14 +68,11 @@ Profile.propTypes = {
 
 Profile.defaultProps = {
     profile: [],
-    saveProfile() { }
+    saveProfile() {}
 }
 
 const mapStateToProps = (state) => ({ profile: getProfile(state) })
 
-const mapDispatchToProps = { saveProfile }
+const mapDispatchToProps = { fetchEmployeesTable, setProfile, saveProfile, showAlert }
 
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withRouter
-)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -1,0 +1,36 @@
+.preloader {
+    display: inline-block;
+    width: 78px;
+    height: 78px;
+}
+
+.preloaderWrapper {
+    margin: 0;
+    padding: 0;
+    background-color: #212121;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader:after {
+    justify-self: center;
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: preloader 1.2s linear infinite;
+}
+
+@keyframes preloader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}

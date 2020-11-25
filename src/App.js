@@ -8,6 +8,7 @@ import ProfileContainer from './components/Profile/Profile';
 import MainPage from './components/MainPage/MainPage';
 import { fetchEmployeesTable } from './__data__/actionCreators';
 import AddEmployee from './components/Profile/AddEmployee';
+import Preloader from './components/common/Preloader/Preloader';
 
 const App = (props) => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App = (props) => {
 
   return (
     <div className="App">
+      <Preloader />
       <Switch>
         <Route exact path='/' render={() => <MainPage />} />
         <Route path='/profile/:personId' render={() => <ProfileContainer />} />

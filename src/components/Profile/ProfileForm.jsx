@@ -19,7 +19,7 @@ const ProfileForm = (props) => (
                     name="name"
                     value={props.profile.name}
                     onChange={props.createHandleChange('name')}
-                    pattern="[А-Яа-яЁё]{1,11}\s[А-Яа-яЁё]{1,11}"/>
+                    pattern="[А-Яа-яЁё]{1,11}\s[А-Яа-яЁё]{1,11} ?"/>
             </div>
             <div>
                 <label htmlFor="phone">Телефон</label>

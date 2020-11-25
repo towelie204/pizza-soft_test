@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { getEmployeesList } from '../../__data__/selectors/employeeSelectors';
-import { addEmployee } from '../../__data__/actionCreators';
+import { addEmployee, showAlert } from '../../__data__/actionCreators';
+import Alert from '../common/Alert/Alert';
 
 import ProfileForm from './ProfileForm';
 
 const AddEmployee = (props) => {
-
     const [profile, setProfile] = useState({
         id: Number(props.employeesList.length + 1),
         name: '',
@@ -41,14 +41,20 @@ const AddEmployee = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.addEmployee(profile)
+        props.addEmployee(profile);
+        props.showAlert();
     }
 
-    return <ProfileForm profile={profile}
-        createHandleChange={createHandleChange}
-        handleSelectRole={handleSelectRole}
-        handleIsArchive={handleIsArchive}
-        handleSubmit={handleSubmit} />
+    return (
+        <>
+            <Alert message='Сотрудник добавлен'/>
+            <ProfileForm profile={profile}
+                createHandleChange={createHandleChange}
+                handleSelectRole={handleSelectRole}
+                handleIsArchive={handleIsArchive}
+                handleSubmit={handleSubmit} />
+        </>
+    )
 }
 
 AddEmployee.propTypes = {
@@ -63,6 +69,6 @@ AddEmployee.defaultProps = {
 
 const mapStateToProps = (state) => ({ employeesList: getEmployeesList(state) })
 
-const mapDispatchToProps = { addEmployee }
+const mapDispatchToProps = { addEmployee, showAlert }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee);

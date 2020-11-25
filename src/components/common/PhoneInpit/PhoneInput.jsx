@@ -18,8 +18,12 @@ class PhoneInput extends React.Component {
     }
 
     render() {
-        return <InputMask {...this.props} mask="+7\ (999) 999-9999" 
-            maskChar=" " pattern="\+[0-9]{1} \([0-9]{3}\) [0-9]{3}-[0-9]{4}" type="tel" alwaysShowMask="true"/>;
+        return <InputMask {...this.props} 
+            mask="+7\ (999) 999-9999" 
+            maskChar=" " 
+            pattern="\+[0-9]{1} \([0-9]{3}\) [0-9]{3}-[0-9]{4}" 
+            type="tel" 
+            alwaysShowMask="true"/>;
     }
 }
 
