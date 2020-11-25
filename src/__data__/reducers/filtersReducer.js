@@ -1,5 +1,6 @@
-import { TOGGLE_SORT_ORDER, SET_ROLE_FILTER, SET_ARCHIVE_FILTER } from '../constants/actionTypes';
 import _ from 'lodash';
+
+import { TOGGLE_SORT_ORDER, SET_ROLE_FILTER, SET_ARCHIVE_FILTER } from '../constants/actionTypes';
 
 let initialState = {
     sorting: null,

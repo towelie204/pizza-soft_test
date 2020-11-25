@@ -30,7 +30,8 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...props.profile
+            ...props.profile,
+            birthday: props.profile.birthday.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')
         }
     }
     

@@ -13,22 +13,26 @@ const ProfileForm = (props) => (
         <form className={styles.employeeForm} onSubmit={props.handleSubmit}>
             <div>
                 <label htmlFor="name">Имя, фамилия</label>
-                <input type="text"
+                <input required={true} 
+                    type="text"
                     id="name"
                     name="name"
                     value={props.profile.name}
-                    onChange={props.createHandleChange('name')} />
+                    onChange={props.createHandleChange('name')}
+                    pattern="[А-Яа-яЁё]{1,11}\s[А-Яа-яЁё]{1,11}"/>
             </div>
             <div>
                 <label htmlFor="phone">Телефон</label>
                 <PhoneInput name="phone"
                     id="phone"
                     value={props.profile.phone}
-                    onChange={props.createHandleChange('phone')} />
+                    onChange={props.createHandleChange('phone')}/>
             </div>
             <div className={styles.select}>
                 <label htmlFor="role">Должность</label>
-                <select defaultValue={props.profile.role} onChange={props.handleSelectRole} name="role" id="role">
+                <select defaultValue={props.profile.role} 
+                    onChange={props.handleSelectRole} 
+                    name="role" id="role">
                     {Object.entries(rolesMap).map(entry => {
                         if (entry[0] !== 'all') {
                             return <option key={entry[0]} value={entry[0]}>{entry[1]}</option>
@@ -39,11 +43,12 @@ const ProfileForm = (props) => (
             </div>
             <div>
                 <label htmlFor="birthday">Дата рождения</label>
-                <input name="birthday"
+                <input required={true}
+                    name="birthday"
                     id="birthday"
                     type="date"
                     value={props.profile.birthday}
-                    onChange={props.createHandleChange('birthday')} />
+                    onChange={props.createHandleChange('birthday')}/>
             </div>
             <div className={styles.archive}>
                 <label htmlFor="isArchive">В архиве: </label>
@@ -51,7 +56,7 @@ const ProfileForm = (props) => (
                     name="isArchive"
                     id="isArchive"
                     checked={props.profile.isArchive}
-                    onChange={props.handleIsArchive} />
+                    onChange={props.handleIsArchive}/>
             </div>
             <div>
                 <button className={styles.submitBtn}>Сохранить изменения</button>
